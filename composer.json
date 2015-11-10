@@ -1,5 +1,5 @@
 {
-    "name": "rbadillap/twitterstreaming-filterhandler",
+    "name": "rbadillap/twitterstreaming-filter",
     "description": "Extension of Twitter Streaming Library which provides methods to filter tweets.",
     "license": "MIT",
     "authors": [
