@@ -1,24 +1,26 @@
 {
-    "name": "rbadillap/twitterstreaming-filter",
-    "description": "Extension of Twitter Streaming Library which provides methods to filter tweets.",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Ronny Badilla",
-            "email": "info@ronnybadilla.com"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {
-        "rbadillap/twitterstreaming": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:rbadillap/twitterstreaming.git"
-        }
-    ],
-    "autoload": {
-        "psr-4": { "FilterHandler\\": "src/FilterHandler" }
+  "name": "rbadillap/twitterstreaming-filter",
+  "description": "Extension of Twitter Streaming Library which provides methods to filter tweets.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ronny Badilla",
+      "email": "info@ronnybadilla.com"
     }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "rbadillap/twitterstreaming": "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:rbadillap/twitterstreaming.git"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "TwitterStreaming\\Extensions\\": "src/Filters"
+    }
+  }
 }

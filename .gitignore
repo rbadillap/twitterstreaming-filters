@@ -13,6 +13,8 @@
 
 # Local tests files
 /index.php
+/tweets.txt.bk
+/tweets.txt
 
 # Vendor folder
 /vendor/
