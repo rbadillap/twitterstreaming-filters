@@ -182,4 +182,79 @@ interface Filterable
      * @return mixed
      */
     public function excludeBlackBerry();
+
+    /**
+     * Indicate the source that should be filtered
+     *
+     * @param string|array $source
+     * @return mixed
+     */
+    public function onlyFromSource($source);
+
+    /**
+     * Indicate the source that should be excluded
+     *
+     * @param string|array $source
+     * @return mixed
+     */
+    public function excludeFromSource($source);
+
+    /**
+     * Include tweets who users has defined a Geo location
+     *
+     * @return mixed
+     */
+    public function withGeo();
+
+    /**
+     * Exclude tweets who users has defined a Geo location
+     *
+     * @return mixed
+     */
+    public function withoutGeo();
+
+    /**
+     * Include tweets with a defined language
+     *
+     * @param string $language
+     * @return mixed
+     */
+    public function withLanguage($language = null);
+
+    /**
+     * Exclude tweets with a defined language
+     *
+     * @param null $language
+     * @return mixed
+     */
+    public function withoutLanguage($language = null);
+
+    /**
+     * Include tweets with hashtags
+     *
+     * @param null $num
+     * @return mixed
+     */
+    public function withHashtags($num = null);
+
+    /**
+     * Exclude tweets with hashtags
+     *
+     * @return mixed
+     */
+    public function withoutHashtags();
+
+    /**
+     * Include tweets from verified users only
+     *
+     * @return mixed
+     */
+    public function onlyVerified();
+
+    /**
+     * Include only RTs from verified users only
+     *
+     * @return mixed
+     */
+    public function onlyRTsFromVerified();
 }

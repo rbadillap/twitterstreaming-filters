@@ -29,6 +29,12 @@ class FiltersFactory implements Filterable
         return array_key_exists($key, $obj);
     }
 
+    /**
+     * Check if within the entities there could be a photo attached
+     *
+     * @param $tweet
+     * @return bool
+     */
     private function _withMediaPhotos($tweet)
     {
         if ($this->with('extended_entities', $tweet) && $this->with('media', $tweet->extended_entities)) {
@@ -44,6 +50,12 @@ class FiltersFactory implements Filterable
         return false;
     }
 
+    /**
+     * Same functionality but checking the videos, on this case, Twitter indicates a video with a animated_gif type.
+     *
+     * @param $tweet
+     * @return bool
+     */
     private function _withMediaVideos($tweet)
     {
         if ($this->with('extended_entities', $tweet) && $this->with('media', $tweet->extended_entities)) {
@@ -59,12 +71,64 @@ class FiltersFactory implements Filterable
         return false;
     }
 
-    private function _checkPhone($phone, $tweet)
+    /**
+     * Source is the channel where the user wrote the tweet, with this method
+     * you can check the source if match with some specific name
+     *
+     * @param $source
+     * @param $tweet
+     * @return bool
+     */
+    private function _checkSource($source, $tweet)
     {
         if ($this->with('source', $tweet) && !empty($tweet->source)) {
-            return strpos(strtolower($tweet->source), $phone) !== false;
+
+            // Check the argument, array and strings are allowed
+            if (is_array($source)) {
+                foreach ($source as $device) {
+                    if (strpos(strtolower($tweet->source), $device) !== false) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            return strpos(strtolower($tweet->source), $source) !== false;
         }
 
+        return false;
+    }
+
+    /**
+     * Check the language of the tweet
+     *
+     * @param $language
+     * @param $tweet
+     * @return bool
+     */
+    private function _checkLanguage($language, $tweet)
+    {
+        if ($this->with('lang', $tweet) && !empty($tweet->lang) && $tweet->lang !== 'und') {
+
+            // Returns true, doesn't matter if user doesn't provide an specific
+            // language, at least there is some defined by the tweet
+            if (!$language) {
+                return true;
+            }
+
+            // Check the argument, array and strings are allowed
+            if (is_array($language)) {
+                foreach ($language as $lang) {
+                    if (strtolower($lang) == strtolower($tweet->lang)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            return strtolower($tweet->lang) == strtolower($language);
+
+        }
         return false;
     }
 
@@ -205,7 +269,7 @@ class FiltersFactory implements Filterable
 
         BaseBehaviors::add(function ($tweet) {
 
-            return $this->_checkPhone('iphone', $tweet);
+            return $this->_checkSource('iphone', $tweet);
 
         }, __METHOD__);
 
@@ -222,7 +286,7 @@ class FiltersFactory implements Filterable
 
         BaseBehaviors::add(function ($tweet) {
 
-            return !$this->_checkPhone('iphone', $tweet);
+            return !$this->_checkSource('iphone', $tweet);
 
         }, __METHOD__);
 
@@ -234,7 +298,7 @@ class FiltersFactory implements Filterable
 
         BaseBehaviors::add(function ($tweet) {
 
-            return $this->_checkPhone('android', $tweet);
+            return $this->_checkSource('android', $tweet);
 
         }, __METHOD__);
 
@@ -251,7 +315,7 @@ class FiltersFactory implements Filterable
 
         BaseBehaviors::add(function ($tweet) {
 
-            return !$this->_checkPhone('android', $tweet);
+            return !$this->_checkSource('android', $tweet);
 
         }, __METHOD__);
 
@@ -262,7 +326,7 @@ class FiltersFactory implements Filterable
     {
         BaseBehaviors::add(function ($tweet) {
 
-            return $this->_checkPhone('windows', $tweet);
+            return $this->_checkSource('windows', $tweet);
 
         }, __METHOD__);
 
@@ -278,7 +342,7 @@ class FiltersFactory implements Filterable
     {
         BaseBehaviors::add(function ($tweet) {
 
-            return !$this->_checkPhone('windows', $tweet);
+            return !$this->_checkSource('windows', $tweet);
 
         }, __METHOD__);
 
@@ -289,7 +353,7 @@ class FiltersFactory implements Filterable
     {
         BaseBehaviors::add(function ($tweet) {
 
-            return $this->_checkPhone('blackberry', $tweet);
+            return $this->_checkSource('blackberry', $tweet);
 
         }, __METHOD__);
 
@@ -305,10 +369,143 @@ class FiltersFactory implements Filterable
     {
         BaseBehaviors::add(function ($tweet) {
 
-            return !$this->_checkPhone('blackberry', $tweet);
+            return !$this->_checkSource('blackberry', $tweet);
 
         }, __METHOD__);
 
         return $this;
     }
+
+    public function onlyFromSource($source)
+    {
+        BaseBehaviors::add(function ($tweet) use ($source) {
+
+            return $this->_checkSource($source, $tweet);
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function excludeFromSource($source)
+    {
+        BaseBehaviors::add(function ($tweet) use ($source) {
+
+            return !$this->_checkSource($source, $tweet);
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function withGeo()
+    {
+        BaseBehaviors::add(function ($tweet) {
+
+            return $this->with('geo', $tweet) && !is_null($tweet->geo);
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function withoutGeo()
+    {
+        BaseBehaviors::add(function ($tweet) {
+
+            return $this->with('geo', $tweet) && is_null($tweet->geo);
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function withLanguage($language = null)
+    {
+        BaseBehaviors::add(function ($tweet) use ($language) {
+
+            return $this->_checkLanguage($language, $tweet);
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function withoutLanguage($language = null)
+    {
+        BaseBehaviors::add(function ($tweet) use ($language) {
+
+            return !$this->_checkLanguage($language, $tweet);
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function withHashtags($num = null)
+    {
+        BaseBehaviors::add(function ($tweet) use ($num) {
+
+            $num = intval($num);
+
+            if (!$this->with('entities', $tweet)) {
+                return false;
+            }
+
+            if (!$this->with('hashtags', $tweet->entities)) {
+                return false;
+            }
+
+            if ($num > 0) {
+                return count($tweet->entities->hashtags) == $num;
+            } else {
+                return count($tweet->entities->hashtags) > 0;
+            }
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function withoutHashtags()
+    {
+        BaseBehaviors::add(function ($tweet) {
+
+            if (!$this->with('entities', $tweet)) {
+                return true;
+            }
+
+            if (!$this->with('hashtags', $tweet->entities)) {
+                return true;
+            }
+
+            return count($tweet->entities->hashtags) == 0;
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function onlyVerified()
+    {
+        BaseBehaviors::add(function ($tweet) {
+
+            return $this->with('user', $tweet) && $tweet->user->verified;
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
+    public function onlyRTsFromVerified()
+    {
+        BaseBehaviors::add(function ($tweet) {
+
+            return $this->with('retweeted_status', $tweet) && $tweet->retweeted_status->user->verified;
+
+        }, __METHOD__);
+
+        return $this;
+    }
+
 }
