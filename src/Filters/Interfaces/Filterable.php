@@ -13,173 +13,178 @@ interface Filterable
 {
     /**
      * Exclude if is a retweet
-     * @return mixed
+     *
+     * @return bool
      */
     public function withoutRTs();
 
     /**
      * Exclude if is a reply
-     * @return mixed
+     *
+     * @return bool
      */
     public function withoutReplies();
 
     /**
      * Exclude the limit notices
+     *
      * @see https://dev.twitter.com/streaming/overview/messages-types#limit_notices
-     * @return mixed
+     * @return bool
      */
     public function withoutLimitNotices();
 
     /**
      * Exclude the delete notices
+     *
      * @see https://dev.twitter.com/streaming/overview/messages-types#status_deletion_notices_delete
-     * @return mixed
+     * @return bool
      */
     public function withoutDeleteNotices();
 
     /**
      * Exclude the tweets which contains media (photos|videos).
-     * @return mixed
+     *
+     * @return bool
      */
     public function withoutMedia();
 
     /**
      * Exclude the tweets which contains media photos
      *
-     * @return mixed
+     * @return bool
      */
     public function withoutMediaPhotos();
 
     /**
      * Alias of withoutMediaPhotos
      *
-     * @return mixed
+     * @return bool
      */
     public function withoutPhotos();
 
     /**
      * Include tweets which has photos
      *
-     * @return mixed
+     * @return bool
      */
     public function withMediaPhotos();
 
     /**
      * Alias of withMediaPhotos
      *
-     * @return mixed
+     * @return bool
      */
     public function withPhotos();
 
     /**
      * Exclude the tweets which contains media videos
      *
-     * @return mixed
+     * @return bool
      */
     public function withoutMediaVideos();
 
     /**
      * Alias of withoutMediaVideos
      *
-     * @return mixed
+     * @return bool
      */
     public function withoutVideos();
 
     /**
      * Include tweets which has videos
      *
-     * @return mixed
+     * @return bool
      */
     public function withMediaVideos();
 
     /**
      * Alias of withMediaVideos
      *
-     * @return mixed
+     * @return bool
      */
     public function withVideos();
 
     /**
      * Include tweets which comes from Iphone only
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyFromIphone();
 
     /**
      * Alias of onlyFromIphone
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyIphone();
 
     /**
      * Exclude tweets which comes from Iphone only
      *
-     * @return mixed
+     * @return bool
      */
     public function excludeIphone();
 
     /**
      * Include tweets which comes from Android only
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyFromAndroid();
 
     /**
      * Alias of onlyFromAndroid
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyAndroid();
 
     /**
      * Exclude tweets which comes from Android only
      *
-     * @return mixed
+     * @return bool
      */
     public function excludeAndroid();
 
     /**
      * Include tweets which comes from WP only
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyFromWindowsPhone();
 
     /**
      * Alias of onlyFromWindowsPhone
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyWindowsPhone();
 
     /**
      * Exclude tweets which comes from WP only
      *
-     * @return mixed
+     * @return bool
      */
     public function excludeWindowsPhone();
 
     /**
      * Include tweets which comes from BlackBerry only
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyFromBlackBerry();
 
     /**
      * Alias of onlyFromBlackBerry
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyBlackBerry();
 
     /**
      * Exclude tweets which comes from BlackBerry only
      *
-     * @return mixed
+     * @return bool
      */
     public function excludeBlackBerry();
 
@@ -187,7 +192,7 @@ interface Filterable
      * Indicate the source that should be filtered
      *
      * @param string|array $source
-     * @return mixed
+     * @return bool
      */
     public function onlyFromSource($source);
 
@@ -195,66 +200,66 @@ interface Filterable
      * Indicate the source that should be excluded
      *
      * @param string|array $source
-     * @return mixed
+     * @return bool
      */
     public function excludeFromSource($source);
 
     /**
      * Include tweets who users has defined a Geo location
      *
-     * @return mixed
+     * @return bool
      */
     public function withGeo();
 
     /**
      * Exclude tweets who users has defined a Geo location
      *
-     * @return mixed
+     * @return bool
      */
     public function withoutGeo();
 
     /**
      * Include tweets with a defined language
      *
-     * @param string $language
-     * @return mixed
+     * @param string|array optional $language
+     * @return bool
      */
     public function withLanguage($language = null);
 
     /**
      * Exclude tweets with a defined language
      *
-     * @param null $language
-     * @return mixed
+     * @param string|array optional $language
+     * @return bool
      */
     public function withoutLanguage($language = null);
 
     /**
      * Include tweets with hashtags
      *
-     * @param null $num
-     * @return mixed
+     * @param int optional $num
+     * @return bool
      */
     public function withHashtags($num = null);
 
     /**
      * Exclude tweets with hashtags
      *
-     * @return mixed
+     * @return bool
      */
     public function withoutHashtags();
 
     /**
      * Include tweets from verified users only
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyVerified();
 
     /**
-     * Include only RTs from verified users only
+     * Include only RTs from Verified users
      *
-     * @return mixed
+     * @return bool
      */
     public function onlyRTsFromVerified();
 }
