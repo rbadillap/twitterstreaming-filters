@@ -17,7 +17,7 @@ As we said, **TwitterStreaming Filters** is an extension of  **TwitterStreaming 
 
 Just run the following command.
 
-    composer require twitterstreamingphp/twitterstreaming-filters
+    composer require rbadillap/twitterstreaming-filters
 
 There is not extra dependencies on this package, this just require the core package.
 
