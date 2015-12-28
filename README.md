@@ -10,7 +10,6 @@ On this document, we'll put all the available methods, and of course, we are ope
  - [How it works](#how-it-works)
  - [More examples](#more-examples)
  - [Contributing](#contributing)
- - [Contact](#contact)
 
 ## Installation
 
@@ -18,7 +17,7 @@ As we said, **TwitterStreaming Filters** is an extension of  **TwitterStreaming 
 
 Just run the following command.
 
-    composer require rbadillap/twitterstreaming-filters
+    composer require twitterstreamingphp/twitterstreaming-filters
 
 There is not extra dependencies on this package, this just require the core package.
 
@@ -335,7 +334,3 @@ Use the same workflow as many of the packages that we have here in Github.
  4. Run the tests (and create your new ones if necessary).
  5. Commit and push the branch.
  6. Create the Pull Request.
-
-## Contact
-
-Any questions regarding this package, shoot this out to info@ronnybadilla.com
