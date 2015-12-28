@@ -1,5 +1,5 @@
 {
-  "name": "rbadillap/twitterstreaming-filter",
+  "name": "rbadillap/twitterstreaming-filters",
   "description": "Extension of Twitter Streaming Library which provides methods to filter tweets.",
   "keywords": [
     "twitter",
