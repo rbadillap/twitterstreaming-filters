@@ -13,5 +13,8 @@
     "psr-4": {
       "TwitterStreaming\\Extensions\\": "src/Filters"
     }
+  },
+  "require": {
+    "rbadillap/twitterstreaming": "*"
   }
 }
