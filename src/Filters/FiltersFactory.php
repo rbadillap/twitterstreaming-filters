@@ -38,13 +38,11 @@ class FiltersFactory implements Filterable
     private function _withMediaPhotos($tweet)
     {
         if ($this->with('extended_entities', $tweet) && $this->with('media', $tweet->extended_entities)) {
-
             foreach ($tweet->extended_entities->media as $media) {
                 if ($media->type == 'photo') {
                     return true;
                 }
             }
-
         }
 
         return false;
@@ -59,13 +57,11 @@ class FiltersFactory implements Filterable
     private function _withMediaVideos($tweet)
     {
         if ($this->with('extended_entities', $tweet) && $this->with('media', $tweet->extended_entities)) {
-
             foreach ($tweet->extended_entities->media as $media) {
                 if ($media->type == 'animated_gif') {
                     return true;
                 }
             }
-
         }
 
         return false;
@@ -127,7 +123,6 @@ class FiltersFactory implements Filterable
             }
 
             return strtolower($tweet->lang) == strtolower($language);
-
         }
         return false;
     }
@@ -167,7 +162,6 @@ class FiltersFactory implements Filterable
         }, __METHOD__);
 
         return $this;
-
     }
 
     public function withoutDeleteNotices()
@@ -190,9 +184,7 @@ class FiltersFactory implements Filterable
         BaseBehaviors::add(function ($tweet) {
 
             if ($this->with('entities', $tweet)) {
-
                 return !$this->with('media', $tweet->entities);
-
             }
 
         }, __METHOD__);
@@ -266,7 +258,6 @@ class FiltersFactory implements Filterable
 
     public function onlyFromIphone()
     {
-
         BaseBehaviors::add(function ($tweet) {
 
             return $this->_checkSource('iphone', $tweet);
@@ -283,7 +274,6 @@ class FiltersFactory implements Filterable
 
     public function excludeIphone()
     {
-
         BaseBehaviors::add(function ($tweet) {
 
             return !$this->_checkSource('iphone', $tweet);
@@ -295,7 +285,6 @@ class FiltersFactory implements Filterable
 
     public function onlyFromAndroid()
     {
-
         BaseBehaviors::add(function ($tweet) {
 
             return $this->_checkSource('android', $tweet);
@@ -312,7 +301,6 @@ class FiltersFactory implements Filterable
 
     public function excludeAndroid()
     {
-
         BaseBehaviors::add(function ($tweet) {
 
             return !$this->_checkSource('android', $tweet);
@@ -507,5 +495,4 @@ class FiltersFactory implements Filterable
 
         return $this;
     }
-
 }

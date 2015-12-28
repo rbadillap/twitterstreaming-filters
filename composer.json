@@ -9,15 +9,6 @@
     }
   ],
   "minimum-stability": "stable",
-  "require": {
-    "rbadillap/twitterstreaming": "dev-master"
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:rbadillap/twitterstreaming.git"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "TwitterStreaming\\Extensions\\": "src/Filters"
