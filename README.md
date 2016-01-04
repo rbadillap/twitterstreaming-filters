@@ -32,7 +32,7 @@ use TwitterStreaming\Tracker;
 use TwitterStreaming\Endpoints;
 use TwitterStreaming\Extensions; // Add this namespace
 
-(new Tracker);
+(new Tracker)
 	// Add the Filters extensions
     ->addExtension(Extensions\Filters::class)
 	// Use the Public endpoint

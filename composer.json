@@ -21,6 +21,7 @@
     }
   },
   "require": {
-    "rbadillap/twitterstreaming": "*"
+    "rbadillap/twitterstreaming": "0.1.*",
+    "vlucas/phpdotenv": "^2.2"
   }
 }

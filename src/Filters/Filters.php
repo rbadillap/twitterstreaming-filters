@@ -16,6 +16,10 @@ use Closure;
  */
 class Filters
 {
+    public function __construct()
+    {
+    }
+
     /**
      * This is the public method that will be used in your script
      *
