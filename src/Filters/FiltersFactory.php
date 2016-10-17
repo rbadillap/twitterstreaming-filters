@@ -138,6 +138,17 @@ class FiltersFactory implements Filterable
         return $this;
     }
 
+    public function withoutQuotes()
+    {
+        BaseBehaviors::add(function ($tweet) {
+
+            return !$this->with('quoted_status', $tweet);
+
+        }, __METHOD__);
+
+        return $this;
+    }
+    
     public function withoutReplies()
     {
         BaseBehaviors::add(function ($tweet) {
