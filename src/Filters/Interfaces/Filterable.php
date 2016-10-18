@@ -18,6 +18,13 @@ interface Filterable
      */
     public function withoutRTs();
 
+     /**
+     * Exclude if is a quote
+     *
+     * @return mixed
+     */
+    public function withoutQuotes();
+    
     /**
      * Exclude if is a reply
      *
