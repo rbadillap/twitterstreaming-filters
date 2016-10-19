@@ -79,6 +79,13 @@ This is the list of filters that we have implemented. (Continuously up to date).
 public function withoutRTs();
 
 /**
+* Exclude if is a quote
+*
+* @return mixed
+*/
+public function withoutQuotes();
+
+/**
  * Exclude if is a reply
  *
  * @return bool
